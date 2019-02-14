@@ -1,5 +1,5 @@
 using System;
-//dhfhfgghgg 
+
 namespace OperationSmurf.Models
 {
     public class ErrorViewModel
