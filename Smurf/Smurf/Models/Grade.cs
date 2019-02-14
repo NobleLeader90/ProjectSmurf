@@ -7,10 +7,10 @@ namespace Smurf.Models
 {
     public class Grade
     {
-        public int ID { get; set; }
-        public int StudentID { get; set; }
-        public int EventID { get; set; }
+        public int Id { get; set; }
+        public int StudentId { get; set; }
+        public int EventId { get; set; }
         public int State { get; set; }
-        public int SectionID { get; set; }
+        public int SectionId { get; set; }
     }
 }

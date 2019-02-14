@@ -7,11 +7,11 @@ namespace Smurf.Models
 {
     public class Student
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int year { get; set; }
-        public string gender { get; set; }
-        public int StudentID { get; set; }
+        public int Year { get; set; }
+        public char Gender { get; set; }
+        public int StudentId { get; set; }
     }
 }
