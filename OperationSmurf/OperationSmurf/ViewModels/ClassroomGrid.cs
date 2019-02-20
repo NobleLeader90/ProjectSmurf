@@ -8,8 +8,6 @@ namespace OperationSmurf.ViewModels
 {
     public class ClassroomGrid
     {
-        static int MAX_STUDENTS = 35;
-        static int MAX_EVENNTS = 50;
         public string CourseName { get; set; }
         public string TeacherName { get; set; }
         public List<Models.Event> Columns { get; set; }
