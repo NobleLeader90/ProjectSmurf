@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,6 +34,13 @@ namespace OperationSmurf
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<OperationSmurf.Models.EventContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EventContext")));
+            services.AddDbContext<OperationSmurf.Models.GradeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GradeContext")));
+            services.AddDbContext<OperationSmurf.Models.SectionContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SectionContext")));
+            services.AddDbContext<OperationSmurf.Models.StudentContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StudentContext")));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
