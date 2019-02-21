@@ -19,6 +19,9 @@
                 @Html.DisplayNameFor(model => model.EventName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.EventCode)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.IsQuiz)
             </th>
             <th>
@@ -41,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventCode)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsQuiz)

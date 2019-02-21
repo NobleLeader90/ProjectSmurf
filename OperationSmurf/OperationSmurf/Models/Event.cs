@@ -9,6 +9,7 @@ namespace OperationSmurf.Models
     {
         public int Id { get; set; }
         public int EventNum { get; set; }
+        public string EventCode { get; set; }
         public string EventName { get; set; }
         public bool IsQuiz { get; set; }
         public bool IsExam { get; set; }

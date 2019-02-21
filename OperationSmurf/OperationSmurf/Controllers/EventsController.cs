@@ -53,7 +53,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EventNum,EventName,IsQuiz,IsExam,GradePointsAvailable,ReqRunCheck")] Event @event)
+        public async Task<IActionResult> Create([Bind("Id,EventNum,EventName,EventCode,IsQuiz,IsExam,GradePointsAvailable,ReqRunCheck")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EventNum,EventName,IsQuiz,IsExam,GradePointsAvailable,ReqRunCheck")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,EventNum,EventName,EventCode,IsQuiz,IsExam,GradePointsAvailable,ReqRunCheck")] Event @event)
         {
             if (id != @event.Id)
             {
