@@ -23,5 +23,14 @@ namespace OperationSmurf.ViewModels
             GradeGrid = gradeGrid ?? throw new ArgumentNullException(nameof(gradeGrid));
         }
 
+        public ClassroomGrid()
+        {
+            CourseName = "";
+            TeacherName = "";
+            Columns = new List<Models.Event>();
+            StudentNames = new List<string>();
+            GradeGrid = new Models.Grade[50,50];  //need some constant parameters here for max size
+        }
+
     }
 }
