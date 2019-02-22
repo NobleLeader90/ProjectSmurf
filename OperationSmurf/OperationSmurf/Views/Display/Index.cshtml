@@ -5,4 +5,7 @@
 
 <h1>MajorDisplayGridPage Goes Here</h1>
 
-<h2>@Model.StudentNames[0]</h2>                 
+@foreach(string name in Model.StudentNames)
+{
+    <h2>@name</h2>
+}

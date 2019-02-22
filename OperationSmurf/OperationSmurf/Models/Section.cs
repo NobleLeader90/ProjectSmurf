@@ -11,5 +11,6 @@ namespace OperationSmurf.Models
         public string CourseName { get; set; }
         public int Period { get; set; }
         public string TeacherName { get; set; }
+        public List<Student> Roster { get; set; }
     }
 }

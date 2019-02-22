@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OperationSmurf.Models;
 
 namespace OperationSmurf.Migrations.Section
 {
     [DbContext(typeof(SectionContext))]
-    partial class SectionContextModelSnapshot : ModelSnapshot
+    [Migration("20190222012403_AddRoster")]
+    partial class AddRoster
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

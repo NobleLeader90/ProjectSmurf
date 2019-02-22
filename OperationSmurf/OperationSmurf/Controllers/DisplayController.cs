@@ -33,7 +33,7 @@ namespace OperationSmurf.Controllers
 
         public IActionResult Index(int Id)
         {
-            var names = _Studentcontext.Student.OrderBy(a => a.LastName).Select(b => b.FirstName).ToList();
+            var names = _Studentcontext.Student.OrderBy(a => a.LastName).Select(b => b.FirstName + " " + b.LastName).ToList();
             foreach(string name in names)
             {
                 bucket.StudentNames.Add(name);
