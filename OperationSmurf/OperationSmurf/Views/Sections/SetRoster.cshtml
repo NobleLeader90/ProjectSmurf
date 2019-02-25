@@ -7,7 +7,7 @@
 <h1>Edit Roster</h1>
 
 <h4>Section</h4>
-<h3>@Model.CourseName</h3>
+<h3>@Model.CourseName - @Model.TeacherName - @Model.Period</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,34 +16,89 @@
             <input type="hidden" asp-for="Id" />
 
             <h1>@Model.Roster.Count</h1>
-            @if (Model.Roster.Count == 0)
-            {
-                Student s = new Student();
-                <h2>got here</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Roster[0].FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Roster[0].LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Roster[0].Gender)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Roster[0].StudentId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Roster[0].Year)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Roster)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Year)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+
+
+
+
+         
+                <h6>Add Student</h6>
                 <div class="form-group">
                     <label asp-for="@Model.Roster[0].FirstName" class="control-label"></label>
                     <input asp-for="@Model.Roster[0].FirstName" class="form-control" />
                     <span asp-validation-for="@Model.Roster[0].FirstName" class="text-danger"></span>
                 </div>
-            }
-
-            else
-            {
-
-
-
-                for (int i = 0; i < @Model.Roster.Count; i++)
-                {
-
-                    <div class="form-group">
-                        <label asp-for="@Model.Roster[i].FirstName" class="control-label"></label>
-                        <input asp-for="@Model.Roster[i].FirstName" class="form-control" />
-                        <span asp-validation-for="@Model.Roster[i].FirstName" class="text-danger"></span>
-                    </div>
-
-                }
-
-            }
+                <div class="form-group">
+                    <label asp-for="@Model.Roster[0].LastName" class="control-label"></label>
+                    <input asp-for="@Model.Roster[0].LastName" class="form-control" />
+                    <span asp-validation-for="@Model.Roster[0].LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Roster[0].Gender" class="control-label"></label>
+                    <input asp-for="@Model.Roster[0].Gender" class="form-control" />
+                    <span asp-validation-for="@Model.Roster[0].Gender" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Roster[0].StudentId" class="control-label"></label>
+                    <input asp-for="@Model.Roster[0].StudentId" class="form-control" />
+                    <span asp-validation-for="@Model.Roster[0].StudentId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Roster[0].Year" class="control-label"></label>
+                    <input asp-for="@Model.Roster[0].Year" class="form-control" />
+                    <span asp-validation-for="@Model.Roster[0].Year" class="text-danger"></span>
+                </div>
+            
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
         </form>
     </div>
 </div>
