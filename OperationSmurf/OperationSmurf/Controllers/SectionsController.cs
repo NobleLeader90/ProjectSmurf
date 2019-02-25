@@ -12,17 +12,48 @@ namespace OperationSmurf.Controllers
     public class SectionsController : Controller
     {
         private readonly SectionContext _context;
+        private Student s1;
+        private Student s2;
+        Section section;
 
         public SectionsController(SectionContext context)
         {
             _context = context;
+
+            //Now experimenting with 2-deep table issue because we need a list of students as a roster in each section. 
+            //First testing how to get roster list out if I manually add a roster while I work out the roster view issues
+            //Manually building 2 students to inject as a test roster
+             s1 = new Student();
+             s2 = new Student();
+            s1.FirstName = "Bob";
+            s1.LastName = "Smith";
+            s2.FirstName = "Alice";
+            s2.LastName = "Jones";
+            section = new Section();
+            
+
+
         }
 
         // GET: Sections
         public async Task<IActionResult> Index()
         {
+            //TEST CODE Checks 4.0
+            section = _context.Section.FirstOrDefault(a => a.CourseName == "IDT");
+            section.Roster.Add(s1);
+            section.Roster.Add(s2);
+
+            //This successfully get RAW output to screen First name only for now
             return View(await _context.Section.ToListAsync());
+
         }
+
+
+
+
+
+
+
 
         // GET: Sections/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -34,6 +65,10 @@ namespace OperationSmurf.Controllers
 
             var section = await _context.Section
                 .FirstOrDefaultAsync(m => m.Id == id);
+            section.Roster.Add(s1);
+            section.Roster.Add(s2);
+
+
             if (section == null)
             {
                 return NotFound();
@@ -53,7 +88,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CourseName,Period,TeacherName")] Section section)
+        public async Task<IActionResult> Create([Bind("Id,CourseName,Period,TeacherName,Roster")] Section section)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +98,37 @@ namespace OperationSmurf.Controllers
             }
             return View(section);
         }
+
+        // GET: Sections/Roster/5
+        public async Task<IActionResult> SetRoster(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var section = await _context.Section.FindAsync(id);
+            if (section == null)
+            {
+                return NotFound();
+            }
+
+
+            //Added to deal with null pointers
+            if (section.Roster.Count == 0)
+            {
+                section.Roster.Add(new Student());
+            }
+
+            return View(section);
+        }
+
+
+
+
+
+
+
 
         // GET: Sections/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -85,7 +151,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseName,Period,TeacherName")] Section section)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseName,Period,TeacherName,Roster")] Section section)
         {
             if (id != section.Id)
             {
