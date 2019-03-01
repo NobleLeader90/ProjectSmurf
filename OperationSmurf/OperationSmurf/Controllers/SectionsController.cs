@@ -50,11 +50,6 @@ namespace OperationSmurf.Controllers
 
 
 
-
-
-
-
-
         // GET: Sections/Details/5
         public async Task<IActionResult> Details(int? id)
         {
