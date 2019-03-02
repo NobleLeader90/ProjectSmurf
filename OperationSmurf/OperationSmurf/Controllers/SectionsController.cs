@@ -12,13 +12,14 @@ namespace OperationSmurf.Controllers
     public class SectionsController : Controller
     {
         private readonly SectionContext _context;
+        //NEW ADDED CONTEXT WE NEED
         private readonly StudentContext _studContext;
        
 
-        public SectionsController(SectionContext context, StudentContext studContext)
+        public SectionsController(SectionContext context, StudentContext studContext)     //<---------------added formal parameter for studentContext injection
         {
             _context = context;
-            _studContext = studContext;
+            _studContext = studContext;     //<---------------added injection
         }
 
         // GET: Sections
@@ -102,7 +103,11 @@ namespace OperationSmurf.Controllers
                 section.Roster.Add(r);
             }
 
-
+            //We must perform ALL sql queries and writes in each controller as needed.  
+            //I now have a simplified setup. See above code for the cleanest way to do this for what is
+            //a build-type query.  Note I had to ADD A STUDENT CONTEXT to this controller. (in now
+            //uses _context (the sectionContext) and the NEW _studContext (studentContext) which I added
+            //as a field and an input parameter for its injection, and the requisit assignment in the constructor.
             return View(section);
         }
 
