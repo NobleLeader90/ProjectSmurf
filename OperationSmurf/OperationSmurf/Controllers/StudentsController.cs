@@ -53,7 +53,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Year,Gender,StudentId")] Student student)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Year,Gender,StudentId,Period1,Period2,Period3,Period4,Period5,Period6")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Year,Gender,StudentId")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Year,Gender,StudentId,Period1,Period2,Period3,Period4,Period5,Period6")] Student student)
         {
             if (id != student.Id)
             {
