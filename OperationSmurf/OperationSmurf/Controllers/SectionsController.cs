@@ -11,11 +11,11 @@ namespace OperationSmurf.Controllers
 {
     public class SectionsController : Controller
     {
+        //Fields of the Controller
         private readonly SectionContext _context;
-        //NEW ADDED CONTEXT WE NEED
         private readonly StudentContext _studContext;
        
-
+        //Constructor
         public SectionsController(SectionContext context, StudentContext studContext)     //<---------------added formal parameter for studentContext injection
         {
             _context = context;
@@ -29,8 +29,6 @@ namespace OperationSmurf.Controllers
             return View(await _context.Section.ToListAsync());
 
         }
-
-
 
         // GET: Sections/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -56,6 +54,7 @@ namespace OperationSmurf.Controllers
         {
             return View();
         }
+
 
         // POST: Sections/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
