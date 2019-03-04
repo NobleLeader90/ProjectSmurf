@@ -174,10 +174,24 @@ namespace OperationSmurf.Controllers
             {
                 try
                 {      
-                    //if (roster.Students != null)
-                    //{
-                       
-                    //}
+                    if (roster.Students == null)
+                    {
+                        roster.Students = new List<Student>();
+                        var studs = _studContext.Student.Where(t =>
+                        
+                        (t.Period1 == roster.Section.Id) || (t.Period2 == roster.Section.Id) || (t.Period3 == roster.Section.Id) ||
+                        (t.Period4 == roster.Section.Id) || (t.Period5 == roster.Section.Id) || (t.Period6 == roster.Section.Id)
+
+                        );
+
+                        foreach (Student f in studs)
+                        {
+                            roster.Students.Add(f);
+                        }
+
+                    }
+
+
 
                     var s = _studContext.Student.First(r => r.LastName == HttpContext.Request.Form["LastName"].ToString());
 
@@ -209,8 +223,8 @@ namespace OperationSmurf.Controllers
                     roster.Students.Add(s);
 
                     _context.Update(roster.Section);
-                    //_studContext.Update(s);
-                   // await _studContext.SaveChangesAsync();
+                    _studContext.Update(s);
+                    await _studContext.SaveChangesAsync();
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -224,7 +238,7 @@ namespace OperationSmurf.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(EditRoster));
             }
             return View(roster);
         }
