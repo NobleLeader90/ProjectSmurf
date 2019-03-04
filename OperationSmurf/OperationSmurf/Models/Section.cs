@@ -11,14 +11,14 @@ namespace OperationSmurf.Models
         public string CourseName { get; set; }
         public int Period { get; set; }
         public string TeacherName { get; set; }
-        public List<Student> Roster { get; set; }
+       // public List<Student> Roster { get; set; }
 
         public Section()
         {
             CourseName = "None Selected";
             Period = 0;
             TeacherName = "Elmer Fudd";
-            Roster = new List<Student>();
+            //Roster = new List<Student>();
         }
 
 

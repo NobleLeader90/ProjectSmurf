@@ -24,9 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.TeacherName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Roster.Count)
-            </th>
+            
             
             <th></th>
         </tr>
@@ -46,7 +44,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TeacherName)
             </td>
-            <td>@item.Roster.Count</td>
+            
                       
             <td>
             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

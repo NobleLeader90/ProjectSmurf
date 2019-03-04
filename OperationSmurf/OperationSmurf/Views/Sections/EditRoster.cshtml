@@ -1,0 +1,137 @@
+﻿@model OperationSmurf.ViewModels.Roster
+
+@{
+    ViewData["Title"] = "Edit Roster";
+}
+
+<h1>Current Roster</h1>
+
+
+<h3>Section: @Model.Section.Period   - @Model.Section.CourseName - @Model.Section.TeacherName  </h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SetRoster">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Section.Id" />
+            <input type="hidden" asp-for="@Model.Section.Period" />
+            <input type="hidden" asp-for="@Model.Section.TeacherName" />
+            <input type="hidden" asp-for="@Model.Section.CourseName" />
+
+            <h4>Roster Count: @Model.Students.Count</h4>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].Gender)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].StudentId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].Year)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].Period1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].Period2)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].Period3)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].Period4)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].Period5)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students[0].Period6)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Students.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].Gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].StudentId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].Year)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].Period1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].Period2)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].Period3)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].Period4)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].Period5)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.Students[i].Period6)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <h4>Select Student to Add</h4>
+            <div class="form-group">
+                <label for="FirstName" class="control-label">First Name</label>
+                <input type="text" name="FirstName" value="" class="form-control" />
+                <span for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="LastName" class="control-label">Last Name</label>
+                <input type="text" name="LastName" class="form-control" />
+                <span for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="StudentId" class="control-label">Student ID</label>
+                <input type="text" name="StudentId" class="form-control" />
+                <span for="StudentId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add Student" class="btn btn-primary" />
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

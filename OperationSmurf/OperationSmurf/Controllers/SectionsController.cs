@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OperationSmurf.Models;
+using OperationSmurf.ViewModels;
 
 namespace OperationSmurf.Controllers
 {
@@ -14,7 +15,10 @@ namespace OperationSmurf.Controllers
         //Fields of the Controller
         private readonly SectionContext _context;
         private readonly StudentContext _studContext;
-       
+        
+
+        //public string LastName { get; private set; }
+
         //Constructor
         public SectionsController(SectionContext context, StudentContext studContext)     //<---------------added formal parameter for studentContext injection
         {
@@ -24,7 +28,7 @@ namespace OperationSmurf.Controllers
 
         // GET: Sections
         public async Task<IActionResult> Index()
-        {
+        {           
            
             return View(await _context.Section.ToListAsync());
 
@@ -72,10 +76,10 @@ namespace OperationSmurf.Controllers
             return View(section);
         }
 
-        // GET: Sections/Roster/5
+        // GET: Sections/ShowRoster/5
         public async Task<IActionResult> ShowRoster(int? id)
         {
-           
+            Roster roster = new Roster();
 
             if (id == null)
             {
@@ -88,18 +92,20 @@ namespace OperationSmurf.Controllers
                 return NotFound();
             }
 
-
+            roster.Section = section;
             //This is the best piece of code I have written all year :)
-            var roster = _studContext.Student.Where(t => 
+            var studs = _studContext.Student.Where(t =>
 
-                (t.Period1 == section.Id) || (t.Period2 == section.Id) || (t.Period3 == section.Id) || 
+                (t.Period1 == section.Id) || (t.Period2 == section.Id) || (t.Period3 == section.Id) ||
                 (t.Period4 == section.Id) || (t.Period5 == section.Id) || (t.Period6 == section.Id)
 
                 );
 
-            foreach(Student r in roster)
+            roster.Students = new List<Student>();
+
+            foreach (Student r in studs)
             {
-                section.Roster.Add(r);
+                roster.Students.Add(r);
             }
 
             //We must perform ALL sql queries and writes in each controller as needed.  
@@ -107,18 +113,59 @@ namespace OperationSmurf.Controllers
             //a build-type query.  Note I had to ADD A STUDENT CONTEXT to this controller. (in now
             //uses _context (the sectionContext) and the NEW _studContext (studentContext) which I added
             //as a field and an input parameter for its injection, and the requisit assignment in the constructor.
-            return View(section);
+            return View(roster);
         }
 
 
-        // POST: Sections/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // GET: Sections/EditRoster/5
+        public async Task<IActionResult> EditRoster(int? id)
+        {
+            Roster roster = new Roster();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var section = await _context.Section.FindAsync(id);
+            if (section == null)
+            {
+                return NotFound();
+            }
+
+            roster.Section = section;
+            //This is the best piece of code I have written all year :)
+            var studs = _studContext.Student.Where(t =>
+
+                (t.Period1 == section.Id) || (t.Period2 == section.Id) || (t.Period3 == section.Id) ||
+                (t.Period4 == section.Id) || (t.Period5 == section.Id) || (t.Period6 == section.Id)
+
+                );
+
+            roster.Students = new List<Student>();
+
+            foreach (Student r in studs)
+            {
+                roster.Students.Add(r);
+            }
+
+            //We must perform ALL sql queries and writes in each controller as needed.  
+            //I now have a simplified setup. See above code for the cleanest way to do this for what is
+            //a build-type query.  Note I had to ADD A STUDENT CONTEXT to this controller. (in now
+            //uses _context (the sectionContext) and the NEW _studContext (studentContext) which I added
+            //as a field and an input parameter for its injection, and the requisit assignment in the constructor.
+            return View(roster);
+        }
+
+
+        //POST: Sections/EditRoster/5
+         //To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SetRoster(int id, [Bind("Id,CourseName,Period,TeacherName,Roster")] Section section)
+        public async Task<IActionResult> EditRoster(int id, [Bind("Section,Students,[FromFormAttribute]FirstName,[FromFormAttribute]LastName,[FromFormAttribute]StudentId")] Roster roster)
         {
-            if (id != section.Id)
+            if (id != roster.Section.Id)
             {
                 return NotFound();
             }
@@ -126,13 +173,49 @@ namespace OperationSmurf.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
-                    _context.Update(section);
+                {      
+                    //if (roster.Students != null)
+                    //{
+                       
+                    //}
+
+                    var s = _studContext.Student.First(r => r.LastName == HttpContext.Request.Form["LastName"].ToString());
+
+
+                    switch (roster.Section.Period)
+                    {
+                        case 1:
+                            s.Period1 = roster.Section.Id;
+                            break;
+                        case 2:
+                            s.Period2 = roster.Section.Id;
+                            break;
+                        case 3:
+                            s.Period3 = roster.Section.Id;
+                            break;
+                        case 4:
+                            s.Period4 = roster.Section.Id;
+                            break;
+                        case 5:
+                            s.Period5 = roster.Section.Id;
+                            break;
+                        case 6:
+                            s.Period6 = roster.Section.Id;
+                            break;
+
+                        default:
+                            break;
+                    }
+                    roster.Students.Add(s);
+
+                    _context.Update(roster.Section);
+                    //_studContext.Update(s);
+                   // await _studContext.SaveChangesAsync();
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SectionExists(section.Id))
+                    if (!SectionExists(roster.Section.Id))
                     {
                         return NotFound();
                     }
@@ -143,7 +226,7 @@ namespace OperationSmurf.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(section);
+            return View(roster);
         }
 
 
@@ -152,25 +235,6 @@ namespace OperationSmurf.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // GET: Sections/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

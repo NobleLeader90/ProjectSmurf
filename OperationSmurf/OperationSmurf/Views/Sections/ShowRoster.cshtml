@@ -1,4 +1,4 @@
-﻿@model OperationSmurf.Models.Section
+﻿@model OperationSmurf.ViewModels.Roster
 
 @{
     ViewData["Title"] = "Edit Roster";
@@ -7,133 +7,98 @@
 <h1>Current Roster</h1>
 
 
-<h3>Section: @Model.Period - @Model.CourseName - @Model.TeacherName  </h3>
+<h3>Section: @Model.Section.Period   - @Model.Section.CourseName - @Model.Section.TeacherName  </h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="SetRoster">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="@Model.Section.Id" />
 
-            <h4>Roster Count: @Model.Roster.Count</h4>
+            <h4>Roster Count: @Model.Students.Count</h4>
 
             <table class="table">
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].FirstName)
+                            @Html.DisplayNameFor(model => model.Students[0].FirstName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].LastName)
+                            @Html.DisplayNameFor(model => model.Students[0].LastName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].Gender)
+                            @Html.DisplayNameFor(model => model.Students[0].Gender)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].StudentId)
+                            @Html.DisplayNameFor(model => model.Students[0].StudentId)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].Year)
+                            @Html.DisplayNameFor(model => model.Students[0].Year)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].Period1)
+                            @Html.DisplayNameFor(model => model.Students[0].Period1)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].Period2)
+                            @Html.DisplayNameFor(model => model.Students[0].Period2)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].Period3)
+                            @Html.DisplayNameFor(model => model.Students[0].Period3)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].Period4)
+                            @Html.DisplayNameFor(model => model.Students[0].Period4)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].Period5)
+                            @Html.DisplayNameFor(model => model.Students[0].Period5)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Roster[0].Period6)                       
+                            @Html.DisplayNameFor(model => model.Students[0].Period6)                       
                         </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Roster)
+                    @for (int i = 0; i<Model.Students.Count; i++)
                     {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => Model.Students[i].FirstName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
+                            @Html.DisplayFor(modelItem => Model.Students[i].LastName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Gender)
+                            @Html.DisplayFor(modelItem => Model.Students[i].Gender)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.StudentId)
+                            @Html.DisplayFor(modelItem => Model.Students[i].StudentId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Year)
+                            @Html.DisplayFor(modelItem => Model.Students[i].Year)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Period1)
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period1)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Period2)
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period2)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Period3)
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period3)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Period4)
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period4)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Period5)
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period5)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Period6)
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period6)
                         </td>
                     </tr>
                     }
                 </tbody>
             </table>
 
-
-
-
-
-
          
-                @*<h6>Add Student</h6>
-                <div class="form-group">
-                    <label asp-for="@Model.Roster[0].FirstName" class="control-label"></label>
-                    <input asp-for="@Model.Roster[0].FirstName" class="form-control" />
-                    <span asp-validation-for="@Model.Roster[0].FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.Roster[0].LastName" class="control-label"></label>
-                    <input asp-for="@Model.Roster[0].LastName" class="form-control" />
-                    <span asp-validation-for="@Model.Roster[0].LastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.Roster[0].Gender" class="control-label"></label>
-                    <input asp-for="@Model.Roster[0].Gender" class="form-control" />
-                    <span asp-validation-for="@Model.Roster[0].Gender" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.Roster[0].StudentId" class="control-label"></label>
-                    <input asp-for="@Model.Roster[0].StudentId" class="form-control" />
-                    <span asp-validation-for="@Model.Roster[0].StudentId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.Roster[0].Year" class="control-label"></label>
-                    <input asp-for="@Model.Roster[0].Year" class="form-control" />
-                    <span asp-validation-for="@Model.Roster[0].Year" class="text-danger"></span>
-                </div>
-            
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>*@
         </form>
     </div>
 </div>

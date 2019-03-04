@@ -52,12 +52,12 @@ namespace OperationSmurf.Controllers
             s2.LastName = "Jones";
 
             var section = _Sectioncontext.Section.FirstOrDefault(a => a.CourseName == "IDT");
-            section.Roster[0] = s1;
-            section.Roster[1] = s2;
-            foreach (Student student in section.Roster)
-            {
-                bucket.StudentNames.Add(student.FirstName + " " + student.LastName);
-            }
+            //section.Roster[0] = s1;
+            //section.Roster[1] = s2;
+            //foreach (Student student in section.Roster)
+            //{
+            //    bucket.StudentNames.Add(student.FirstName + " " + student.LastName);
+            //}
 
 
 
