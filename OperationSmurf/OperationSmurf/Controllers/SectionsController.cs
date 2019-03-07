@@ -163,7 +163,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditRoster(int id, [Bind("Section,Students,[FromFormAttribute]FirstName,[FromFormAttribute]LastName,[FromFormAttribute]StudentId")] Roster roster)
+        public async Task<IActionResult> EditRoster(int id, [Bind("Section,Students,[FromFormAttribute]FirstName,[FromFormAttribute]LastName,[FromFormAttribute]StudentId,[FromFormAttribute]StudRemover")] Roster roster)
         {
             if (id != roster.Section.Id)
             {
@@ -261,6 +261,8 @@ namespace OperationSmurf.Controllers
         }
 
 
+
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -310,6 +312,109 @@ namespace OperationSmurf.Controllers
             }
             return View(section);
         }
+
+        // GET: Sections/RemoveStudent/5
+        public async Task<IActionResult> RemoveStudent(int? id, Roster roster)  
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+               
+            var section = await _context.Section
+               .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (section == null)
+            {
+                return NotFound();
+            }
+            //Roster roster = new Roster();
+            //roster.Section = section;
+            roster.Students = new List<Student>();
+
+            if (roster.Students.Count == 0)
+            {
+                roster.Students = new List<Student>();
+                var studs = _studContext.Student.Where(t =>
+
+                (t.Period1 == roster.Section.Id) || (t.Period2 == roster.Section.Id) || (t.Period3 == roster.Section.Id) ||
+                (t.Period4 == roster.Section.Id) || (t.Period5 == roster.Section.Id) || (t.Period6 == roster.Section.Id)
+
+                );
+
+                foreach (Student f in studs)
+                {
+                    roster.Students.Add(f);
+                    await _context.SaveChangesAsync();
+                    
+                }
+                return RedirectToAction(nameof(EditRoster),id);
+            }
+
+            return View(roster);
+             
+        }
+
+        // Post: Sections/RemoveStudent/5
+        [HttpPost, ActionName("RemoveStudent")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmRemoveStudent(int id)
+        {
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
+
+            var section = await _context.Section
+               .FirstOrDefaultAsync(m => m.Id == id);
+            if (section == null)
+            {
+                return NotFound();
+            }
+            Roster roster = new Roster();
+            roster.Section = section;
+            roster.Students = new List<Student>();
+
+            if (roster.Students.Count == 0)
+            {
+                roster.Students = new List<Student>();
+                var studs = _studContext.Student.Where(t =>
+
+                (t.Period1 == roster.Section.Id) || (t.Period2 == roster.Section.Id) || (t.Period3 == roster.Section.Id) ||
+                (t.Period4 == roster.Section.Id) || (t.Period5 == roster.Section.Id) || (t.Period6 == roster.Section.Id)
+
+                );
+
+                String s = HttpContext.Request.Form["StudRemover"];
+                int p = Convert.ToInt32(s);
+
+                foreach (Student f in studs)
+                {
+                    if (f.Id == p)
+                    {
+                        if (f.Period1 == roster.Section.Id) { f.Period1 = 0; }
+                        if (f.Period2 == roster.Section.Id) { f.Period2 = 0; }
+                        if (f.Period3 == roster.Section.Id) { f.Period3 = 0; }
+                        if (f.Period4 == roster.Section.Id) { f.Period4 = 0; }
+                        if (f.Period5 == roster.Section.Id) { f.Period5 = 0; }
+                        if (f.Period6 == roster.Section.Id) { f.Period6 = 0; }
+                    }
+                }
+                await _context.SaveChangesAsync();
+                await _studContext.SaveChangesAsync();
+                return RedirectToAction(nameof(EditRoster), id);
+            }
+
+            return View(roster);
+
+        }
+
+
+
+
+
+
+
 
         // GET: Sections/Delete/5
         public async Task<IActionResult> Delete(int? id)
