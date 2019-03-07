@@ -191,10 +191,25 @@ namespace OperationSmurf.Controllers
 
                     }
 
+                    Student s;
+                    try
+                    {
+                         s = _studContext.Student.First(r =>
 
+                            ((r.FirstName == HttpContext.Request.Form["FirstName"].ToString()) &&
 
-                    var s = _studContext.Student.First(r => r.LastName == HttpContext.Request.Form["LastName"].ToString());
+                            (r.LastName == HttpContext.Request.Form["LastName"].ToString())) ||                   
 
+                            (r.StudentId == HttpContext.Request.Form["StudentId"])
+
+                            );
+                    } catch
+                    {
+                        ViewBag.Message = "Student Not Found in Database...";
+                             return (View(roster));
+                    }
+
+                   
 
                     switch (roster.Section.Period)
                     {
@@ -238,15 +253,12 @@ namespace OperationSmurf.Controllers
                         throw;
                     }
                 }
+                ViewBag.Message = "";
                 return RedirectToAction(nameof(EditRoster));
             }
+            ViewBag.Message = "";
             return View(roster);
         }
-
-
-
-
-
 
 
         public async Task<IActionResult> Edit(int? id)
