@@ -10,5 +10,6 @@ namespace OperationSmurf.ViewModels
     {
         public Section Section { get; set; }
         public virtual List<Student> Students { get; set; }
+        public int targetStudent { get; set; }
     }
 }

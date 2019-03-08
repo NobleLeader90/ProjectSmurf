@@ -365,8 +365,10 @@ namespace OperationSmurf.Controllers
             //    return NotFound();
             //}
 
+            int rosterId = Convert.ToInt32(HttpContext.Request.Form["RosterNum"]);
+
             var section = await _context.Section
-               .FirstOrDefaultAsync(m => m.Id == id);
+               .FirstOrDefaultAsync(m => m.Id == rosterId);
             if (section == null)
             {
                 return NotFound();
@@ -383,14 +385,11 @@ namespace OperationSmurf.Controllers
                 (t.Period1 == roster.Section.Id) || (t.Period2 == roster.Section.Id) || (t.Period3 == roster.Section.Id) ||
                 (t.Period4 == roster.Section.Id) || (t.Period5 == roster.Section.Id) || (t.Period6 == roster.Section.Id)
 
-                );
-
-                String s = HttpContext.Request.Form["StudRemover"];
-                int p = Convert.ToInt32(s);
+                );               
 
                 foreach (Student f in studs)
                 {
-                    if (f.Id == p)
+                    if (f.Id == id)
                     {
                         if (f.Period1 == roster.Section.Id) { f.Period1 = 0; }
                         if (f.Period2 == roster.Section.Id) { f.Period2 = 0; }
@@ -402,10 +401,10 @@ namespace OperationSmurf.Controllers
                 }
                 await _context.SaveChangesAsync();
                 await _studContext.SaveChangesAsync();
-                return RedirectToAction(nameof(EditRoster), id);
+                return RedirectToAction(nameof(EditRoster), new { id = rosterId });
             }
 
-            return View(roster);
+            return RedirectToAction(nameof(EditRoster), new { id = rosterId });
 
         }
 
