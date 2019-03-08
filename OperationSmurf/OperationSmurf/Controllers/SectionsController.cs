@@ -200,7 +200,7 @@ namespace OperationSmurf.Controllers
 
                             (r.LastName == HttpContext.Request.Form["LastName"].ToString())) ||                   
 
-                            (r.StudentId == HttpContext.Request.Form["StudentId"])
+                            (r.StudentId == Convert.ToInt32(HttpContext.Request.Form["StudentId"]))
 
                             );
                     } catch
