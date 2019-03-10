@@ -191,16 +191,36 @@ namespace OperationSmurf.Controllers
 
                     }
 
-                    Student s;
+                    int findID = 0;
+
+                    Student s = new Student();
                     try
                     {
-                         s = _studContext.Student.First(r =>
+                        //findID = Convert.ToInt32(HttpContext.Request.Form["StudentId"]);
+                        if (int.TryParse(HttpContext.Request.Form["StudentId"], out findID))
+                        {
 
-                            ((r.FirstName == HttpContext.Request.Form["FirstName"].ToString()) &&
+                        }
+                        else
+                        {
+                            findID = 0;
+                        }
+                    } catch
 
-                            (r.LastName == HttpContext.Request.Form["LastName"].ToString())) ||                   
+                    {
+                        ViewBag.Message = "Error Calculating Student ID Number";
+                        return (View(roster));
+                    }
+                    try
+                    {
 
-                            (r.StudentId == Convert.ToInt32(HttpContext.Request.Form["StudentId"]))
+                        s = _studContext.Student.First(r =>
+
+                           ((r.FirstName.Contains(HttpContext.Request.Form["FirstName"].ToString().Trim())) &&
+
+                           (r.LastName.Contains(HttpContext.Request.Form["LastName"].ToString().Trim()))) ||
+
+                           (r.StudentId == findID)
 
                             );
                     } catch
@@ -407,13 +427,6 @@ namespace OperationSmurf.Controllers
             return RedirectToAction(nameof(EditRoster), new { id = rosterId });
 
         }
-
-
-
-
-
-
-
 
         // GET: Sections/Delete/5
         public async Task<IActionResult> Delete(int? id)
