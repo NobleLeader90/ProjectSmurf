@@ -65,7 +65,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CourseName,Period,TeacherName,Roster")] Section section)
+        public async Task<IActionResult> Create([Bind("Id,CourseName,Period,EventCode,TeacherName,Roster")] Section section)
         {
             if (ModelState.IsValid)
             {
@@ -303,7 +303,7 @@ namespace OperationSmurf.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseName,Period,TeacherName,Roster")] Section section)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseName,Period,EventCode,TeacherName,Roster")] Section section)
         {
             if (id != section.Id)
             {

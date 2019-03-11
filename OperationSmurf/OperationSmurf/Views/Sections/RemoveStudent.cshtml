@@ -15,6 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="@Model.Section.Id" />
             <input type="hidden" asp-for="@Model.Section.Period" />
+            <input type="hidden" asp-for="@Model.Section.EventCode" />
             <input type="hidden" asp-for="@Model.Section.TeacherName" />
             <input type="hidden" asp-for="@Model.Section.CourseName" />
 
@@ -96,14 +97,14 @@
                             <td>
                                 @Html.DisplayFor(modelItem => Model.Students[i].Period6)
                             </td>
-                            
+
                         </tr>
                     }
                 </tbody>
             </table>
-           
+
             <p class="alert-danger">@ViewBag.Message</p>
-           
+
 
         </form>
     </div>

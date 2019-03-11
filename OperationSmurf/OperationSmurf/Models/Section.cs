@@ -11,8 +11,8 @@ namespace OperationSmurf.Models
         public string CourseName { get; set; }
         public int Period { get; set; }
         public string TeacherName { get; set; }
-       
-        
+        public String EventCode { get; set; }
+
 
 
 

@@ -56,10 +56,7 @@ namespace OperationSmurf.Controllers
             if (s2 == null)
             {
                 s2 = _sectionContext.Section.FirstOrDefault(m => m.Id == 1);
-            }
-
-            
-
+            }  
 
             //Loading Students
             var studs =  _studentContext.Student.Where(s =>
@@ -73,6 +70,14 @@ namespace OperationSmurf.Controllers
             foreach(Student student in studs) {
                 classToView.StudentNames.Add(student.FirstName + " " + student.LastName);
             }
+
+            //Loading Columns of Events
+         //   var cols = _context.Event.Where(e => e.)
+
+
+
+
+
 
 
 
