@@ -7,3 +7,21 @@
     <h1 class="display-4">Welcome to Johns Creek SMF/MOWR</h1>
     <p>This Section is most likely where we will place the status grid/main display</a>.</p>
 </div>
+<div>
+    <table>
+        <thead>
+            @{
+                    List<Section> classes = (List<Section>)ViewData["classes"];
+                    foreach (Section section in classes)
+                    {
+                        String s = section.Period + section.CourseName;
+                    <input type="submit" value="@s" class="btn btn-danger" formaction="" />
+                
+
+
+
+            }
+            }
+            </thead>
+        </table>
+</div>

@@ -12,14 +12,7 @@ namespace OperationSmurf.Models
         public int Period { get; set; }
         public string TeacherName { get; set; }
        
-
-        public Section()
-        {
-            CourseName = "None Selected";
-            Period = 0;
-            TeacherName = "Elmer Fudd";
-            
-        }
+        
 
 
 

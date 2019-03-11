@@ -10,8 +10,31 @@ namespace OperationSmurf.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly EventContext _context;
+        private readonly GradeContext _gradeContext;
+        private readonly StudentContext _studentContext;
+        private readonly SectionContext _sectionContext;
+
+        public HomeController(EventContext ec, GradeContext gc, StudentContext sc, SectionContext ssc)
+        {
+            _context = ec;
+            _gradeContext = gc;
+            _studentContext = sc;
+            _sectionContext = ssc;
+        }
+                     
         public IActionResult Index()
         {
+            var classes = new List<Section>();
+            //todo: Add array of links to load each class' view
+            foreach(Section section in _sectionContext.Section)
+            {
+                classes.Add(section);
+            }
+            ViewData["classes"] = classes;
+
+
+
             return View();
         }
 
