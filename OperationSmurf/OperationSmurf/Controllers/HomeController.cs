@@ -23,7 +23,7 @@ namespace OperationSmurf.Controllers
             _sectionContext = ssc;
         }
                      
-        public IActionResult Index()
+        public IActionResult Index(int ?id)
         {
             var classes = new List<Section>();
             //todo: Add array of links to load each class' view
@@ -33,7 +33,7 @@ namespace OperationSmurf.Controllers
             }
             ViewData["classes"] = classes;
 
-
+            ViewData["tracer"] = "This is the ID: " + id.ToString();
 
             return View();
         }

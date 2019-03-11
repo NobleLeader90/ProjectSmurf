@@ -5,23 +5,22 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Johns Creek SMF/MOWR</h1>
-    <p>This Section is most likely where we will place the status grid/main display</a>.</p>
+    <p>Select a Section to Display</p>
 </div>
-<div>
-    <table>
-        <thead>
-            @{
-                    List<Section> classes = (List<Section>)ViewData["classes"];
-                    foreach (Section section in classes)
-                    {
-                        String s = section.Period + section.CourseName;
-                    <input type="submit" value="@s" class="btn btn-danger" formaction="" />
-                
+<div class="text-center">
+    <form asp-action="Home">
+        @{
+            List<Section> classes = (List<Section>)ViewData["classes"];
+            foreach (Section section in classes)
+            {
+                String s = section.Period + ": " + section.CourseName;
+                int id = section.Id;
 
-
+                <input type="submit" value="@s" class="btn btn-dark" align="center" formaction="/Home/Index/@id" />
 
             }
-            }
-            </thead>
-        </table>
+        }
+
+    </form>
+    <p>Message from Tracer: @ViewData["tracer"]</p>
 </div>
