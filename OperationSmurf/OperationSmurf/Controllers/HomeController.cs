@@ -48,6 +48,7 @@ namespace OperationSmurf.Controllers
 
             ClassroomGrid classToView = new ClassroomGrid();
             classToView.StudentNames = new List<string>();
+            classToView.Columns = new List<Event>();
 
             //Loading current section found by ID of button clicked in View
             var s2 =  _sectionContext.Section
@@ -72,7 +73,12 @@ namespace OperationSmurf.Controllers
             }
 
             //Loading Columns of Events
-         //   var cols = _context.Event.Where(e => e.)
+            var cols = _context.Event.Where(e => e.EventCode == s2.EventCode);
+            foreach (Event ev in cols)
+            {
+                classToView.Columns.Add(ev);
+            }
+
 
 
 

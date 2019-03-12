@@ -21,7 +21,16 @@
         }
     </form>
     <p>Message from Tracer: @ViewData["tracer"]</p>
-
+    <table class="table-bordered">
+        <thead class="table-dark">Students</thead>
+        @{ 
+            foreach(Event ev in Model.Columns)
+            {
+                <thead class="table-active">@ev.EventNum</thead>
+            }
+        }
+        <thead></thead>
+    </table>
     <div>
         @{ 
             foreach(String s in @Model.StudentNames)
