@@ -31,7 +31,7 @@
             @{
                 foreach (Event ev in Model.Columns)
                 {
-                    <th class="mvc-grid-headers" width="10px">@ev.EventNum</th>
+                    <th class="mvc-grid-headers" data-toggle="tooltip" data-placement="top" title ="@ev.EventName"   width="10px">@ev.EventNum</th>
                 }
 
             }
