@@ -21,26 +21,55 @@
         }
     </form>
     <p>Message from Tracer: @ViewData["tracer"]</p>
-    <table class="table-bordered">
-        <thead class="table-dark">Students</thead>
-        @{ 
-            foreach(Event ev in Model.Columns)
-            {
-                <thead class="table-active">@ev.EventNum</thead>
-            }
-        }
-        <thead></thead>
-    </table>
-    <div>
-        @{ 
-            foreach(String s in @Model.StudentNames)
-            {
-                <p>@s</p>
-            }
-        }
-    </div>
-
-
-
-
+    <br /><br /><br />
 </div>
+
+<table class="mvc-grid table">
+    <thead>
+        <tr>
+            <th class="mvc-grid-headers" width="15%">Student Names</th>
+            @{
+                foreach (Event ev in Model.Columns)
+                {
+                    <th class="mvc-grid-headers" width="10px">@ev.EventNum</th>
+                }
+
+            }
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            foreach (String s in @Model.StudentNames)
+            {
+                <tr>
+                    <td width="15%">@s</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+@*<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.1/dist/bootstrap-table.min.js"></script>*@
+
+
+@*@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model).Titled("Student Name");
+        
+
+       
+    })
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)*@
+
+
