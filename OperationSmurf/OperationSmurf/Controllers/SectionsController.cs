@@ -15,15 +15,19 @@ namespace OperationSmurf.Controllers
         //Fields of the Controller
         private readonly SectionContext _context;
         private readonly StudentContext _studContext;
-        
+        private readonly GradeContext _gradeContext;
+        private readonly EventContext _eventContext;
+
 
         //public string LastName { get; private set; }
 
         //Constructor
-        public SectionsController(SectionContext context, StudentContext studContext)     //<---------------added formal parameter for studentContext injection
+        public SectionsController(SectionContext context, StudentContext studContext, GradeContext gradeContext, EventContext eventContext)     //<---------------added formal parameter for studentContext injection
         {
             _context = context;
             _studContext = studContext;     //<---------------added injection
+            _gradeContext = gradeContext;
+            _eventContext = eventContext;
         }
 
         // GET: Sections
@@ -461,5 +465,50 @@ namespace OperationSmurf.Controllers
         {
             return _context.Section.Any(e => e.Id == id);
         }
+
+        [HttpPost, ActionName("Reset")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PopulateGradeSheet(int id)
+        {
+            int findId = 0;
+
+            if (int.TryParse(HttpContext.Request.Form["RosterNum"], out findId))
+            {
+
+            }
+            else
+            {
+                findId = 0;
+            }
+
+            Section section = await _context.Section.FindAsync(findId);
+
+            Student stud = await _studContext.Student.FindAsync(id);
+            //Grade grade = new Grade();
+            
+            var events =  _eventContext.Event.Where(c => c.EventCode == section.EventCode);
+
+            foreach(Event ev in events)
+            {                        
+                _gradeContext.Add(new Grade {
+
+                    SectionId = id,
+                    StudentId = stud.Id,
+                    EventId = ev.Id
+            });
+            }
+            await _gradeContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));          
+        }
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -64,44 +64,47 @@
                 <tbody>
                     @for (int i = 0; i < Model.Students.Count; i++)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].FirstName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].Gender)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].StudentId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].Year)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].Period1)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].Period2)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].Period3)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].Period4)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].Period5)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => Model.Students[i].Period6)
-                            </td>
-                            <td class="form-group">
-                                <input type="submit" value="Remove Student" class="btn btn-danger" formaction="/Sections/RemoveStudent/@Model.Students[i].Id" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].StudentId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].Year)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period3)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period4)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period5)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Students[i].Period6)
+                        </td>
+                        <td class="form-group">
+                            <input type="submit" value="Remove Student" class="btn btn-danger" formaction="/Sections/RemoveStudent/@Model.Students[i].Id" />
+                        </td>
+                        <td class="form-group">                          
+                            <input type="submit" value="Reset Grade Sheet" class="btn btn-dark" formaction="/Sections/Reset/@Model.Students[i].Id" />
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

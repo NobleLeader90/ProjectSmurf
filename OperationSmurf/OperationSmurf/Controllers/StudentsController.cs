@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LINQtoCSV;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -148,5 +149,37 @@ namespace OperationSmurf.Controllers
         {
             return _context.Student.Any(e => e.Id == id);
         }
+
+        //Load CSV of Students
+        public async Task<IActionResult> ReadInStudents()
+        {
+            CsvFileDescription inputFileDescription = new CsvFileDescription()
+            {
+                SeparatorChar = ',',
+                FirstLineHasColumnNames = true
+            };
+
+            CsvContext cc = new CsvContext();
+
+            IEnumerable<Student> students =
+                cc.Read<Student>(@"C:\Users\Raymond\Desktop\students.csv", inputFileDescription);
+
+            foreach (Student stud in students)
+            {
+                _context.Add(stud);
+               
+            }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+            
+        }
+
+
+
+
+
+
     }
 }
