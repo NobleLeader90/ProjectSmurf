@@ -162,7 +162,7 @@ namespace OperationSmurf.Controllers
             CsvContext cc = new CsvContext();
 
             IEnumerable<Student> students =
-                cc.Read<Student>(@"C:\Users\Raymond\Desktop\students.csv", inputFileDescription);
+                cc.Read<Student>(@"C:\Users\raysc\Desktop\students.csv", inputFileDescription);
 
             foreach (Student stud in students)
             {

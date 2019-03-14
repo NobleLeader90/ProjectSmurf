@@ -31,7 +31,7 @@
             @{
                 foreach (Event ev in Model.Columns)
                 {
-                    <th class="mvc-grid-headers" data-toggle="tooltip" data-placement="top" title ="@ev.EventName"   width="10px">@ev.EventNum</th>
+                    <th class="mvc-grid-headers" data-toggle="tooltip" data-placement="top" title="@ev.EventName" width="10px">@ev.EventNum</th>
                 }
 
             }
@@ -39,14 +39,25 @@
     </thead>
     <tbody>
 
+
         @{
-            foreach (String s in @Model.StudentNames)
+            for (int x = 0; x < Model.Students.Count; x++)
             {
                 <tr>
-                    <td width="15%">@s</td>
+                    <td width="15%">@Model.StudentNames[x]</td>
+
+                @for (int y = 0; y< Model.Columns.Count; y++)
+                    {
+                    <td>@Model.GradeGrid[x, y].State</td>
+                    }
                 </tr>
             }
         }
+
+
+
+
+
 
     </tbody>
 </table>

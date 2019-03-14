@@ -163,7 +163,7 @@ namespace OperationSmurf.Controllers
             CsvContext cc = new CsvContext();
 
             IEnumerable<Event> events =
-                cc.Read<Event>(@"C:\Users\Raymond\Desktop\events.csv", inputFileDescription);
+                cc.Read<Event>(@"C:\Users\raysc\Desktop\events.csv", inputFileDescription);
 
             foreach (Event ev in events)
             {

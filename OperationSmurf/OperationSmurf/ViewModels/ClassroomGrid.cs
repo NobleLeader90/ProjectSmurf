@@ -11,6 +11,7 @@ namespace OperationSmurf.ViewModels
         public string CourseName { get; set; }
         public string TeacherName { get; set; }
         public List<Models.Event> Columns { get; set; }
+        public List<Student> Students { get; set; }
         public List<string> StudentNames { get; set; }
         public Models.Grade[,] GradeGrid   { get; set; }
 

@@ -39,18 +39,68 @@ namespace OperationSmurf.Controllers
             ViewData["classes"] = classes;
             ViewData["tracer"] = "This is the ID: " + id.ToString();
 
-            //Now that we know we are selecting the appropriate Section,
-            //we must instantiate the viewmodel and then populate it for viewing.
+            ClassroomGrid myClass = new ClassroomGrid();
+            myClass = getViewModel(id);
+            //ClassroomGrid classToView = new ClassroomGrid();
+            //classToView.StudentNames = new List<string>();
+            //classToView.Columns = new List<Event>();
 
-            //Todo: We will still need to figure out how to make cells editable,
-            //But first we need to get the data from all the contexts into the viewmodel
-            //Successfully. That starts here:
+            ////Todo: calculate dynamic size
+            //classToView.GradeGrid = new Grade[50,50];
 
-            ClassroomGrid classToView = new ClassroomGrid();
-            classToView.StudentNames = new List<string>();
-            classToView.Columns = new List<Event>();
+            ////Loading current section found by ID of button clicked in View
+            //var s2 =  _sectionContext.Section
+            //    .FirstOrDefault(m => m.Id == id);
 
-            //Loading current section found by ID of button clicked in View
+            //if (s2 == null)
+            //{
+            //    s2 = _sectionContext.Section.FirstOrDefault(m => m.Id == 1);
+            //}  
+           
+
+            //Loading Columns of Events
+            //var cols = _context.Event.Where(e => e.EventCode == s2.EventCode);
+            //foreach (Event ev in cols)
+            //{
+            //    classToView.Columns.Add(ev);
+            //}
+
+            ////Loading Students for Grades
+
+            //classToView.Students = _studentContext.Student.Where(m => 
+            //(m.Period1 == id) ||
+            //(m.Period2 == id) ||
+            //(m.Period3 == id) ||
+            //(m.Period4 == id) ||
+            //(m.Period5 == id) ||
+            //(m.Period6 == id) 
+            //).ToList();
+
+            ////Loading Students
+            //foreach (Student student in classToView.Students)
+            //{
+            //    classToView.StudentNames.Add(student.FirstName + " " + student.LastName);
+            //}
+
+            //int numStuds = classToView.Students.Count();
+
+            
+            //for(int x=0; x < numStuds; x++)
+            //{
+
+            //    for(int y=0; y<classToView.Columns.Count; y++)
+            //    {
+            //        //Grades pulled that match the section and match the student
+            //        classToView.GradeGrid[x, y] = _gradeContext.Grade.First(g => (g.EventId == classToView.Columns[y].Id) && (g.StudentId == classToView.Students[x].Id));
+            //    }
+                
+            //}
+            return View(myClass);
+        }
+
+        public ClassroomGrid getViewModel(int ?id = 1)
+        {
+            ////Loading current section found by ID of button clicked in View
             var s2 =  _sectionContext.Section
                 .FirstOrDefault(m => m.Id == id);
 
@@ -59,36 +109,66 @@ namespace OperationSmurf.Controllers
                 s2 = _sectionContext.Section.FirstOrDefault(m => m.Id == 1);
             }  
 
-            //Loading Students
-            var studs =  _studentContext.Student.Where(s =>
-                   (s.Period1 == id) ||
-                   (s.Period2 == id) ||
-                   (s.Period3 == id) ||
-                   (s.Period4 == id) ||
-                   (s.Period5 == id) ||
-                   (s.Period6 == id));
 
-            foreach(Student student in studs) {
-                classToView.StudentNames.Add(student.FirstName + " " + student.LastName);
-            }
+            Section section = _sectionContext.Section.Find(id);
+            ClassroomGrid classToView = new ClassroomGrid();
+
+            classToView.StudentNames = new List<string>();
+            classToView.Columns = new List<Event>();
 
             //Loading Columns of Events
             var cols = _context.Event.Where(e => e.EventCode == s2.EventCode);
             foreach (Event ev in cols)
             {
-                classToView.Columns.Add(ev);
+               classToView.Columns.Add(ev);
             }
 
 
 
+            classToView.Students = _studentContext.Student.Where(m =>
+            (m.Period1 == id) ||
+            (m.Period2 == id) ||
+            (m.Period3 == id) ||
+            (m.Period4 == id) ||
+            (m.Period5 == id) ||
+            (m.Period6 == id)
+            ).ToList();
+            classToView.GradeGrid = new Grade[classToView.Students.Count, classToView.Columns.Count];
+
+            //Loading Students
+            foreach (Student student in classToView.Students)
+            {
+                classToView.StudentNames.Add(student.FirstName + " " + student.LastName);
+            }
+
+            int numStuds = classToView.Students.Count();
+            for (int x = 0; x < numStuds; x++)
+            {
+
+                for (int y = 0; y < classToView.Columns.Count; y++)
+                {
+                    //Grades pulled that match the section and match the student
+                    classToView.GradeGrid[x, y] = _gradeContext.Grade.First(g => (g.EventId == classToView.Columns[y].Id) && (g.StudentId == classToView.Students[x].Id));
+                }
+
+            }
 
 
 
-
-
-
-            return View(classToView);
+            return classToView;
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         public IActionResult Privacy()
         {
