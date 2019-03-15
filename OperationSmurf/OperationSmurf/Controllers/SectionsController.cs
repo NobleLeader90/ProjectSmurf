@@ -32,10 +32,8 @@ namespace OperationSmurf.Controllers
 
         // GET: Sections
         public async Task<IActionResult> Index()
-        {           
-           
+        {                     
             return View(await _context.Section.ToListAsync());
-
         }
 
         // GET: Sections/Details/5
@@ -492,7 +490,7 @@ namespace OperationSmurf.Controllers
             {                        
                 _gradeContext.Add(new Grade {
 
-                    SectionId = id,
+                    SectionId = findId,
                     StudentId = stud.Id,
                     EventId = ev.Id
             });

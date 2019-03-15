@@ -33,11 +33,11 @@
 <table class="mvc-grid table">
     <thead>
         <tr>
-            <th class="mvc-grid-headers" width="15%">Student Names</th>
+            <th class="mvc-grid-headers" width="40%">Student Names</th>
             @{
                 foreach (Event ev in Model.Columns)
                 {
-                    <th class="mvc-grid-headers" data-toggle="tooltip" data-placement="top" title="@ev.EventName" width="10px">@ev.EventNum</th>
+                    <th class="mvc-grid-headers" data-toggle="tooltip" data-placement="top" title="@ev.Id:@ev.EventNum." width="10px">@ev.EventNum</th>
                 }
 
             }
@@ -51,22 +51,22 @@
             {
 
         <tr>
-            <td width="15%">@Model.StudentNames[x]</td>
+            <td width="40%">@Model.StudentNames[x]</td>
 
             @for (int y = 0; y < Model.Columns.Count; y++)
             {
                 @switch (Model.GradeGrid[x, y].State){
-                    case 0: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star" display="inline-block;"></td>
+                    case 0: <td width="40px"; data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="far fa-circle" style="color: black;"></p></td>
                             break;
-                    case 1: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star" ></td>
+                    case 1: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-plane" style="color: royalblue;"></p></td>
                             break;
-                    case 2: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
+                    case 2: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-star" style="color: darkred;"></p></td>
                             break;
-                    case 3: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
+                    case 3: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-star" style="color: darkblue;"></p></td>
                             break;
-                    case 4: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
+                    case 4: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-star" style="color: silver;"></p></td>
                             break;
-                    case 5: <td class="fas fa-star"></td>
+                    case 5: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-star" style="color: gold;"></p></td>
                             break;
                     default: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
                             break;
