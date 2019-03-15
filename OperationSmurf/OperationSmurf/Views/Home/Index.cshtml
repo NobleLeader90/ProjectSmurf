@@ -9,6 +9,7 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to Johns Creek SMF/MOWR</h1>
     <p>Select a Section to Display</p>
+    <p class="fas fa-igloo"></p>
 
 </div>
 <div class="text-center">
@@ -49,14 +50,34 @@
             @for (int x = 0; x < Model.Students.Count; x++)
             {
 
-                <tr>
-                    <td width="15%">@Model.StudentNames[x]</td>
+        <tr>
+            <td width="15%">@Model.StudentNames[x]</td>
 
-                    @for (int y = 0; y < Model.Columns.Count; y++)
-                    {
-                        <td>@Model.GradeGrid[x, y].State</td>
-                    }
-                </tr>
+            @for (int y = 0; y < Model.Columns.Count; y++)
+            {
+                @switch (Model.GradeGrid[x, y].State){
+                    case 0: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star" display="inline-block;"></td>
+                            break;
+                    case 1: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star" ></td>
+                            break;
+                    case 2: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
+                            break;
+                    case 3: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
+                            break;
+                    case 4: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
+                            break;
+                    case 5: <td class="fas fa-star"></td>
+                            break;
+                    default: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
+                            break;
+                }
+                /**/
+
+
+
+                @*<td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId">@Model.GradeGrid[x, y].State</td>*@
+            }
+        </tr>
 
             }
         }
