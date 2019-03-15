@@ -1,5 +1,7 @@
 ﻿@model OperationSmurf.ViewModels.ClassroomGrid
 
+
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,9 +9,11 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to Johns Creek SMF/MOWR</h1>
     <p>Select a Section to Display</p>
+
 </div>
 <div class="text-center">
     <form asp-action="Home">
+
         @{
             List<Section> classes = (List<Section>)ViewData["classes"];
             foreach (Section section in classes)
@@ -21,6 +25,7 @@
         }
     </form>
     <p>Message from Tracer: @ViewData["tracer"]</p>
+
     <br /><br /><br />
 </div>
 
@@ -39,28 +44,34 @@
     </thead>
     <tbody>
 
-
-        @{
-            for (int x = 0; x < Model.Students.Count; x++)
+        @try
+        {
+            @for (int x = 0; x < Model.Students.Count; x++)
             {
+
                 <tr>
                     <td width="15%">@Model.StudentNames[x]</td>
 
-                @for (int y = 0; y< Model.Columns.Count; y++)
+                    @for (int y = 0; y < Model.Columns.Count; y++)
                     {
-                    <td>@Model.GradeGrid[x, y].State</td>
+                        <td>@Model.GradeGrid[x, y].State</td>
                     }
                 </tr>
+
             }
         }
-
-
-
+        catch (Exception e)
+        {
+            @ViewData["LoadError"]
+        }
 
 
 
     </tbody>
 </table>
+
+
+
 
 @*<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -69,18 +80,18 @@
 
 
 @*@(Html
-    .Grid(Model)
-    .Build(columns =>
-    {
-        columns.Add(model => model).Titled("Student Name");
-        
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model).Titled("Student Name");
 
-       
-    })
-    .Empty("No data found")
-    .Filterable()
-    .Sortable()
-    .Pageable()
-)*@
+
+
+        })
+        .Empty("No data found")
+        .Filterable()
+        .Sortable()
+        .Pageable()
+    )*@
 
 

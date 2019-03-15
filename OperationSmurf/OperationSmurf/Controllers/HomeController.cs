@@ -147,8 +147,24 @@ namespace OperationSmurf.Controllers
 
                 for (int y = 0; y < classToView.Columns.Count; y++)
                 {
-                    //Grades pulled that match the section and match the student
-                    classToView.GradeGrid[x, y] = _gradeContext.Grade.First(g => (g.EventId == classToView.Columns[y].Id) && (g.StudentId == classToView.Students[x].Id));
+
+                    try
+                    {
+                        //Grades pulled that match the section and match the student
+                        classToView.GradeGrid[x, y] = _gradeContext.Grade.First(g => (g.EventId == classToView.Columns[y].Id) && (g.StudentId == classToView.Students[x].Id));
+
+                        if (classToView.GradeGrid == null)
+                        {
+                            classToView.GradeGrid[0, 0] = new Grade();
+                            ViewData["LoadError"] = "Grade grid was empty for this section...";
+                        }
+
+
+                    }catch(Exception e)
+                    {
+                        ViewData["LoadError"] = "Grade grid was empty for this section...";
+                    }
+                    
                 }
 
             }
