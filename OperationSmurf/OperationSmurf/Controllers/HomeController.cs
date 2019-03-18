@@ -41,60 +41,7 @@ namespace OperationSmurf.Controllers
 
             ClassroomGrid myClass = new ClassroomGrid();
             myClass = getViewModel(id);
-            //ClassroomGrid classToView = new ClassroomGrid();
-            //classToView.StudentNames = new List<string>();
-            //classToView.Columns = new List<Event>();
-
-            ////Todo: calculate dynamic size
-            //classToView.GradeGrid = new Grade[50,50];
-
-            ////Loading current section found by ID of button clicked in View
-            //var s2 =  _sectionContext.Section
-            //    .FirstOrDefault(m => m.Id == id);
-
-            //if (s2 == null)
-            //{
-            //    s2 = _sectionContext.Section.FirstOrDefault(m => m.Id == 1);
-            //}  
-           
-
-            //Loading Columns of Events
-            //var cols = _context.Event.Where(e => e.EventCode == s2.EventCode);
-            //foreach (Event ev in cols)
-            //{
-            //    classToView.Columns.Add(ev);
-            //}
-
-            ////Loading Students for Grades
-
-            //classToView.Students = _studentContext.Student.Where(m => 
-            //(m.Period1 == id) ||
-            //(m.Period2 == id) ||
-            //(m.Period3 == id) ||
-            //(m.Period4 == id) ||
-            //(m.Period5 == id) ||
-            //(m.Period6 == id) 
-            //).ToList();
-
-            ////Loading Students
-            //foreach (Student student in classToView.Students)
-            //{
-            //    classToView.StudentNames.Add(student.FirstName + " " + student.LastName);
-            //}
-
-            //int numStuds = classToView.Students.Count();
-
             
-            //for(int x=0; x < numStuds; x++)
-            //{
-
-            //    for(int y=0; y<classToView.Columns.Count; y++)
-            //    {
-            //        //Grades pulled that match the section and match the student
-            //        classToView.GradeGrid[x, y] = _gradeContext.Grade.First(g => (g.EventId == classToView.Columns[y].Id) && (g.StudentId == classToView.Students[x].Id));
-            //    }
-                
-            //}
             return View(myClass);
         }
 
@@ -112,7 +59,7 @@ namespace OperationSmurf.Controllers
 
             Section section = _sectionContext.Section.Find(id);
             ClassroomGrid classToView = new ClassroomGrid();
-
+            classToView.CourseName = section.CourseName;
             classToView.StudentNames = new List<string>();
             classToView.Columns = new List<Event>();
 

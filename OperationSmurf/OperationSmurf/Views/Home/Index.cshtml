@@ -16,7 +16,8 @@
     <div class="text-center">
         <form asp-action="Home">
 
-            @{
+            @{        
+               
                 List<Section> classes = (List<Section>)ViewData["classes"];
                 foreach (Section section in classes)
                 {
@@ -47,7 +48,8 @@
             </tr>
         </thead>
         <tbody>
-
+            @{ int studAtX = 0;
+                int assignAtY = 0;}
             @try
             {
                 @for (int x = 0; x < Model.Students.Count; x++)
@@ -61,7 +63,7 @@
                             @switch (Model.GradeGrid[x, y].State)
                             {
                                 case 0:
-                                    <td width="40px" ; data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="far fa-circle" style="color: black;"></p></td>
+                                    <td width="40px" ; data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal"><p class="far fa-circle" style="color: black;"></p></a></td>
                                     break;
                                 case 1:
                                     <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-plane" style="color: royalblue;"></p></td>
@@ -138,8 +140,9 @@
             
         </div>
         <div class="modal-lg" style="text-align:center;">
-            <form>
-                <p>Change from state: @Model.GradeGrid[0,0].State</p>
+            <form>  
+                <p>@Model.CourseName, @w</p>
+                <p>Change from state:@Model.GradeGrid[0,0].State</p>
                 <p>For Event: @Model.GradeGrid[0,0].EventId</p>
                 <select name="ChangeState" id="dropDown" onchange="changeColor();" class="far" style="height:55px; width:55px; font-weight:900; display:inline-block;">
                     <option value="1" style="font-weight: 900; color:black;">&#xf111;</option>
