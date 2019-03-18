@@ -12,107 +12,150 @@
     <p class="fas fa-igloo"></p>
 
 </div>
-<div class="text-center">
-    <form asp-action="Home">
+<div id="mainContent">
+    <div class="text-center">
+        <form asp-action="Home">
 
-        @{
-            List<Section> classes = (List<Section>)ViewData["classes"];
-            foreach (Section section in classes)
-            {
-                String s = section.Period + ": " + section.CourseName;
-                int id = section.Id;
-                <input type="submit" value="@s" class="btn btn-dark" align="center" formaction="/Home/Index/@id" />
+            @{
+                List<Section> classes = (List<Section>)ViewData["classes"];
+                foreach (Section section in classes)
+                {
+                    String s = section.Period + ": " + section.CourseName;
+                    int id = section.Id;
+                    <input type="submit" value="@s" class="btn btn-dark" align="center" formaction="/Home/Index/@id" />
+                }
             }
-        }
-    </form>
-    <p>Message from Tracer: @ViewData["tracer"]</p>
+        </form>
+        <p>Message from Tracer: @ViewData["tracer"]</p>
 
-    <br /><br /><br />
+        <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch Modal</a>
+
+        <br /><br /><br />
+    </div>
+
+    <table class="mvc-grid table">
+        <thead>
+            <tr>
+                <th class="mvc-grid-headers" width="40%">Student Names</th>
+                @{
+                    foreach (Event ev in Model.Columns)
+                    {
+                        <th class="mvc-grid-headers" data-toggle="tooltip" data-placement="top" title="@ev.Id:@ev.EventNum." width="10px">@ev.EventNum</th>
+                    }
+
+                }
+            </tr>
+        </thead>
+        <tbody>
+
+            @try
+            {
+                @for (int x = 0; x < Model.Students.Count; x++)
+                {
+
+                    <tr>
+                        <td width="40%">@Model.StudentNames[x]</td>
+
+                        @for (int y = 0; y < Model.Columns.Count; y++)
+                        {
+                            @switch (Model.GradeGrid[x, y].State)
+                            {
+                                case 0:
+                                    <td width="40px" ; data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="far fa-circle" style="color: black;"></p></td>
+                                    break;
+                                case 1:
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-plane" style="color: royalblue;"></p></td>
+                                    break;
+                                case 2:
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-star" style="color: darkred;"></p></td>
+                                    break;
+                                case 3:
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-star" style="color: darkblue;"></p></td>
+                                    break;
+                                case 4:
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-star" style="color: silver;"></p></td>
+                                    break;
+                                case 5:
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-star" style="color: gold;"></p></td>
+                                    break;
+                                default:
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId" class="fas fa-star"></td>
+                                    break;
+                            }
+                            /**/
+
+
+
+                            @*<td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId">@Model.GradeGrid[x, y].State</td>*@
+                        }
+                    </tr>
+
+                }
+            }
+            catch (Exception e)
+            {
+                @ViewData["LoadError"]
+            }
+
+
+
+        </tbody>
+    </table>
+
 </div>
 
-<table class="mvc-grid table">
-    <thead>
-        <tr>
-            <th class="mvc-grid-headers" width="40%">Student Names</th>
-            @{
-                foreach (Event ev in Model.Columns)
-                {
-                    <th class="mvc-grid-headers" data-toggle="tooltip" data-placement="top" title="@ev.Id:@ev.EventNum." width="10px">@ev.EventNum</th>
+
+<!-- Modal Popup Section of this view-->
+<div id="myModal" class="modal" tabindex="-1" role="dialog" style="width:300px; height: 200px; margin-top: 10em; margin-left: 10em; align-content:center; text-align:center;">
+    <div style="text-align:center;background-color:antiquewhite">
+        <div class="modal-header" >
+            <script>
+                function changeColor() {
+                        var select = $("#dropDown");
+                        if(select.val() === "1") {
+                            select.css("color", "Black");
+                        }
+                        else if(select.val() === "2") {
+                            select.css("color", "royalblue");
+                        }
+                        else if (select.val() === "3") {
+                            select.css("color", "darkred");
+                        }
+                        else if(select.val() === "4") {
+                            select.css("color", "darkblue");
+                        }
+                        else if(select.val() === "5") {
+                            select.css("color", "silver");
+                        }
+                        else if(select.val() === "6") {
+                            select.css("color", "gold");
+                        }
+
                 }
-
-            }
-        </tr>
-    </thead>
-    <tbody>
-
-        @try
-        {
-            @for (int x = 0; x < Model.Students.Count; x++)
-            {
-
-        <tr>
-            <td width="40%">@Model.StudentNames[x]</td>
-
-            @for (int y = 0; y < Model.Columns.Count; y++)
-            {
-                @switch (Model.GradeGrid[x, y].State){
-                    case 0: <td width="40px"; data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="far fa-circle" style="color: black;"></p></td>
-                            break;
-                    case 1: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-plane" style="color: royalblue;"></p></td>
-                            break;
-                    case 2: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-star" style="color: darkred;"></p></td>
-                            break;
-                    case 3: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-star" style="color: darkblue;"></p></td>
-                            break;
-                    case 4: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-star" style="color: silver;"></p></td>
-                            break;
-                    case 5: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId"><p class="fas fa-star" style="color: gold;"></p></td>
-                            break;
-                    default: <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId" class="fas fa-star"></td>
-                            break;
-                }
-                /**/
-
-
-
-                @*<td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId">@Model.GradeGrid[x, y].State</td>*@
-            }
-        </tr>
-
-            }
-        }
-        catch (Exception e)
-        {
-            @ViewData["LoadError"]
-        }
-
-
-
-    </tbody>
-</table>
-
-
-
-
-@*<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.14.1/dist/bootstrap-table.min.js"></script>*@
-
-
-@*@(Html
-        .Grid(Model)
-        .Build(columns =>
-        {
-            columns.Add(model => model).Titled("Student Name");
-
-
-
-        })
-        .Empty("No data found")
-        .Filterable()
-        .Sortable()
-        .Pageable()
-    )*@
-
-
+            </script>
+            <p style="text-align:left;"><h6>Change Signoff Status</h6></p>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="false">x</button>
+            
+        </div>
+        <div class="modal-lg" style="text-align:center;">
+            <form>
+                <p>Change from state: @Model.GradeGrid[0,0].State</p>
+                <p>For Event: @Model.GradeGrid[0,0].EventId</p>
+                <select name="ChangeState" id="dropDown" onchange="changeColor();" class="far" style="height:55px; width:55px; font-weight:900; display:inline-block;">
+                    <option value="1" style="font-weight: 900; color:black;">&#xf111;</option>
+                    <option value="2" style="font-weight: 900; color: royalblue;">&#xf072;</option>
+                    <option value="3" style="font-weight: 900; color: darkred;">&#xf005;</option>
+                    <option value="4" style="font-weight: 900; color: darkblue;">&#xf005;</option>
+                    <option value="5" style="font-weight: 900; color: silver;">&#xf005;</option>
+                    <option value="6" style="font-weight: 900; color: gold;">&#xf005;</option>
+                </select>
+            </form>
+                   
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="false">Close</button>
+            <button id="submitButton" class="btn btn-primary">Make Change</button>
+        </div>
+    </div>
+    
+</div>

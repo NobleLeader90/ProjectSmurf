@@ -176,6 +176,11 @@ namespace OperationSmurf.Controllers
 
 
 
+        //Attempting a popup dialog box to mark grades state changes.
+        public ActionResult ModalPopUp()
+        {
+            return PartialView();
+        }
 
 
 

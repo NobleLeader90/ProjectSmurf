@@ -19,13 +19,11 @@ namespace OperationSmurf.Controllers
         private readonly EventContext _eventContext;
 
 
-        //public string LastName { get; private set; }
-
         //Constructor
         public SectionsController(SectionContext context, StudentContext studContext, GradeContext gradeContext, EventContext eventContext)     //<---------------added formal parameter for studentContext injection
         {
             _context = context;
-            _studContext = studContext;     //<---------------added injection
+            _studContext = studContext;     //<---------------added injection (Lower 3)
             _gradeContext = gradeContext;
             _eventContext = eventContext;
         }
@@ -62,6 +60,7 @@ namespace OperationSmurf.Controllers
         }
 
 
+
         // POST: Sections/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -77,6 +76,8 @@ namespace OperationSmurf.Controllers
             }
             return View(section);
         }
+
+
 
         // GET: Sections/ShowRoster/5
         public async Task<IActionResult> ShowRoster(int? id)
@@ -119,6 +120,7 @@ namespace OperationSmurf.Controllers
         }
 
 
+
         // GET: Sections/EditRoster/5
         public async Task<IActionResult> EditRoster(int? id)
         {
@@ -158,6 +160,7 @@ namespace OperationSmurf.Controllers
             //as a field and an input parameter for its injection, and the requisit assignment in the constructor.
             return View(roster);
         }
+
 
 
         //POST: Sections/EditRoster/5
@@ -300,6 +303,8 @@ namespace OperationSmurf.Controllers
             return View(section);
         }
 
+
+
         // POST: Sections/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -334,6 +339,8 @@ namespace OperationSmurf.Controllers
             }
             return View(section);
         }
+
+
 
         // GET: Sections/RemoveStudent/5
         public async Task<IActionResult> RemoveStudent(int? id, Roster roster)  
@@ -376,6 +383,8 @@ namespace OperationSmurf.Controllers
             return View(roster);
              
         }
+
+
 
         // Post: Sections/RemoveStudent/5
         [HttpPost, ActionName("RemoveStudent")]
@@ -430,6 +439,8 @@ namespace OperationSmurf.Controllers
 
         }
 
+
+
         // GET: Sections/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -448,6 +459,9 @@ namespace OperationSmurf.Controllers
             return View(section);
         }
 
+
+
+
         // POST: Sections/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -458,6 +472,8 @@ namespace OperationSmurf.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
 
         private bool SectionExists(int id)
         {
