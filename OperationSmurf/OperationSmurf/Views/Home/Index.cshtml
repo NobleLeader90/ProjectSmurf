@@ -5,7 +5,17 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
+    <script>
+        //function getValue(x,y) {
+        //    alert(x);
+        //    alert(y);
+        //    //var gradeIndex = document.getElementsById("ZeroField");
+        //    //var gradeId = gradeIndex.getAttribute("data-TargetGrade");
+        //    $(document).getElementById('#changetext').innerHTML = "test";
+        //    //return gradeId;
+        //}
+        
+    </script>
 <div class="text-center">
     <h1 class="display-4">Welcome to Johns Creek SMF/MOWR</h1>
     <p>Select a Section to Display</p>
@@ -63,22 +73,22 @@
                             @switch (Model.GradeGrid[x, y].State)
                             {
                                 case 0:
-                                    <td width="40px" ; data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal"><p class="far fa-circle" style="color: black;"></p></a></td>
+                                    <td width="40px"  data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="far fa-circle" style="color: black;"></p></a></td>
                                     break;
                                 case 1:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-plane" style="color: royalblue;"></p></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-plane" style="color: royalblue;"></p></a></td>
                                     break;
                                 case 2:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-star" style="color: darkred;"></p></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: darkred;"></p></a></td>
                                     break;
                                 case 3:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-star" style="color: darkblue;"></p></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: darkblue;"></p></a></td>
                                     break;
                                 case 4:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-star" style="color: silver;"></p></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: silver;"></p></a></td>
                                     break;
                                 case 5:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><p class="fas fa-star" style="color: gold;"></p></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: gold;"></p></a></td>
                                     break;
                                 default:
                                     <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId" class="fas fa-star"></td>
@@ -132,7 +142,6 @@
                         else if(select.val() === "6") {
                             select.css("color", "gold");
                         }
-
                 }
             </script>
             <p style="text-align:left;"><h6>Change Signoff Status</h6></p>
@@ -140,10 +149,12 @@
             
         </div>
         <div class="modal-lg" style="text-align:center;">
-            <form>  
-                <p>@Model.CourseName, @w</p>
-                <p>Change from state:@Model.GradeGrid[0,0].State</p>
-                <p>For Event: @Model.GradeGrid[0,0].EventId</p>
+
+            <input type="hidden" name="gradeId" value="" />
+            <p name="lastName"></p>
+            <p name="state"></p>
+            <p name="eventId"></p>
+            <form>
                 <select name="ChangeState" id="dropDown" onchange="changeColor();" class="far" style="height:55px; width:55px; font-weight:900; display:inline-block;">
                     <option value="1" style="font-weight: 900; color:black;">&#xf111;</option>
                     <option value="2" style="font-weight: 900; color: royalblue;">&#xf072;</option>
@@ -153,7 +164,6 @@
                     <option value="6" style="font-weight: 900; color: gold;">&#xf005;</option>
                 </select>
             </form>
-                   
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="false">Close</button>

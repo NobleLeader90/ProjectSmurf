@@ -123,9 +123,11 @@ namespace OperationSmurf.Controllers
 
 
 
-        //Attempting a popup dialog box to mark grades state changes.
-        public ActionResult ModalPopUp()
+        //Action to fill targets in ViewModel and return to popup launch
+        public ActionResult ModalPopUp(int ?id=1)
         {
+            
+
             return PartialView();
         }
 
