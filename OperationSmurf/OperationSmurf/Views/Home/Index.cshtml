@@ -73,25 +73,25 @@
                             @switch (Model.GradeGrid[x, y].State)
                             {
                                 case 0:
-                                    <td width="40px"  data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="far fa-circle" style="color: black;"></p></a></td>
+                                    <td width="40px"  data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="far fa-circle" style="color: black;"></p></a></td>
                                     break;
                                 case 1:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-plane" style="color: royalblue;"></p></a></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-plane" style="color: royalblue;"></p></a></td>
                                     break;
                                 case 2:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: darkred;"></p></a></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: darkred;"></p></a></td>
                                     break;
                                 case 3:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: darkblue;"></p></a></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: darkblue;"></p></a></td>
                                     break;
                                 case 4:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: silver;"></p></a></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: silver;"></p></a></td>
                                     break;
                                 case 5:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: gold;"></p></a></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-star" style="color: gold;"></p></a></td>
                                     break;
                                 default:
-                                    <td data-toggle="tooltip" data-placement="top" title="@Model.GradeGrid[x,y].StudentId:@Model.GradeGrid[x,y].EventId" class="fas fa-star"></td>
+                                    <td data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum" class="fas fa-star"></td>
                                     break;
                             }
                             /**/
@@ -118,56 +118,63 @@
 
 
 <!-- Modal Popup Section of this view-->
-<div id="myModal" class="modal" tabindex="-1" role="dialog" style="width:300px; height: 200px; margin-top: 10em; margin-left: 10em; align-content:center; text-align:center;">
+<div id="myModal" class="modal" tabindex="-1" role="dialog" style="text-align: center; border-radius:100px; width:400px; height: 400px; margin:auto; align-content:center; text-align:center;">
     <div style="text-align:center;background-color:antiquewhite">
-        <div class="modal-header" >
+        <div class="modal-header">
             <script>
                 function changeColor() {
-                        var select = $("#dropDown");
-                        if(select.val() === "1") {
-                            select.css("color", "Black");
-                        }
-                        else if(select.val() === "2") {
-                            select.css("color", "royalblue");
-                        }
-                        else if (select.val() === "3") {
-                            select.css("color", "darkred");
-                        }
-                        else if(select.val() === "4") {
-                            select.css("color", "darkblue");
-                        }
-                        else if(select.val() === "5") {
-                            select.css("color", "silver");
-                        }
-                        else if(select.val() === "6") {
-                            select.css("color", "gold");
-                        }
+                    var select = $("#dropDown");
+                    if (select.val() === "1") {
+                        select.css("color", "Black");
+                    }
+                    else if (select.val() === "2") {
+                        select.css("color", "royalblue");
+                    }
+                    else if (select.val() === "3") {
+                        select.css("color", "darkred");
+                    }
+                    else if (select.val() === "4") {
+                        select.css("color", "darkblue");
+                    }
+                    else if (select.val() === "5") {
+                        select.css("color", "silver");
+                    }
+                    else if (select.val() === "6") {
+                        select.css("color", "gold");
+                    }
                 }
             </script>
-            <p style="text-align:left;"><h6>Change Signoff Status</h6></p>
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="false">x</button>
-            
         </div>
-        <div class="modal-lg" style="text-align:center;">
+            <div>
+                <p style="text-align:center;"><h6>Change Signoff Status</h6></p>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="false">x</button>
 
-            <input type="hidden" name="gradeId" value="" />
-            <p name="lastName"></p>
-            <p name="state"></p>
-            <p name="eventId"></p>
-            <form>
-                <select name="ChangeState" id="dropDown" onchange="changeColor();" class="far" style="height:55px; width:55px; font-weight:900; display:inline-block;">
-                    <option value="1" style="font-weight: 900; color:black;">&#xf111;</option>
-                    <option value="2" style="font-weight: 900; color: royalblue;">&#xf072;</option>
-                    <option value="3" style="font-weight: 900; color: darkred;">&#xf005;</option>
-                    <option value="4" style="font-weight: 900; color: darkblue;">&#xf005;</option>
-                    <option value="5" style="font-weight: 900; color: silver;">&#xf005;</option>
-                    <option value="6" style="font-weight: 900; color: gold;">&#xf005;</option>
-                </select>
-            </form>
-        </div>
+
+                <div class="modal-lg" style="text-align:center;">
+                    <form>
+                        <input type="hidden" name="gradeId" value="" />
+                        <p name="lastName"></p>
+                        <p name="state"></p>
+                        <p name="eventId"></p>
+
+                        <select name="ChangeState" id="dropDown" onchange="changeColor();" class="far" style="height:55px; width:55px; font-weight:900; display:inline-block;">
+                            <option value="1" style="font-weight: 900; color:black;">&#xf111;</option>
+                            <option value="2" style="font-weight: 900; color: royalblue;">&#xf072;</option>
+                            <option value="3" style="font-weight: 900; color: darkred;">&#xf005;</option>
+                            <option value="4" style="font-weight: 900; color: darkblue;">&#xf005;</option>
+                            <option value="5" style="font-weight: 900; color: silver;">&#xf005;</option>
+                            <option value="6" style="font-weight: 900; color: gold;">&#xf005;</option>
+                        </select>
+                    </form> 
+                    <div style="margin-top: 10px;">
+                        <button class="btn" data-dismiss="modal" aria-hidden="false">Close</button>
+                        <button id="submitButton" class="btn btn-primary">Make Change</button>
+                    </div>
+                </div>
+            </div>
+        
         <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="false">Close</button>
-            <button id="submitButton" class="btn btn-primary">Make Change</button>
+           
         </div>
     </div>
     
