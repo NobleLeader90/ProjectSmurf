@@ -118,8 +118,8 @@
 
 
 <!-- Modal Popup Section of this view-->
-<div id="myModal" class="modal" tabindex="-1" role="dialog" style="text-align: center; border-radius:100px; width:400px; height: 400px; margin:auto; align-content:center; text-align:center;">
-    <div style="text-align:center;background-color:antiquewhite">
+<div id="myModal" class="modal  alert-success" tabindex="-1" role="dialog" style="text-align: center; border-radius:80px; width:20%; height:40%; margin:auto; align-content:flex-start; text-align:center;">
+    <div>
         <div class="modal-header">
             <script>
                 function changeColor() {
@@ -143,38 +143,39 @@
                         select.css("color", "gold");
                     }
                 }
-            </script>
+
+/**/</script>
         </div>
-            <div>
-                <p style="text-align:center;"><h6>Change Signoff Status</h6></p>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="false">x</button>
+
+        <h3>Change Signoff Status<button type="button" class="close" data-dismiss="modal" aria-hidden="false" style="margin-right:10px;">x</button></h3>
 
 
-                <div class="modal-lg" style="text-align:center;">
-                    <form>
-                        <input type="hidden" name="gradeId" value="" />
-                        <p name="lastName"></p>
-                        <p name="state"></p>
-                        <p name="eventId"></p>
 
-                        <select name="ChangeState" id="dropDown" onchange="changeColor();" class="far" style="height:55px; width:55px; font-weight:900; display:inline-block;">
-                            <option value="1" style="font-weight: 900; color:black;">&#xf111;</option>
-                            <option value="2" style="font-weight: 900; color: royalblue;">&#xf072;</option>
-                            <option value="3" style="font-weight: 900; color: darkred;">&#xf005;</option>
-                            <option value="4" style="font-weight: 900; color: darkblue;">&#xf005;</option>
-                            <option value="5" style="font-weight: 900; color: silver;">&#xf005;</option>
-                            <option value="6" style="font-weight: 900; color: gold;">&#xf005;</option>
-                        </select>
-                    </form> 
-                    <div style="margin-top: 10px;">
-                        <button class="btn" data-dismiss="modal" aria-hidden="false">Close</button>
-                        <button id="submitButton" class="btn btn-primary">Make Change</button>
-                    </div>
-                </div>
-            </div>
-        
+        <div class="modal-lg" style="text-align:left; margin-left:2em;">
+            <form>
+                <input type="hidden" name="gradeId" value="" />
+                <strong>Student:</strong><p name="lastName">Current Grade: </p>
+                <strong>Event:</strong><p name="eventId"></p>
+                <strong>Current Grade:</strong><p name="state"></p>
+                <strong>Select New Grade:</strong>
+                <select name="ChangeState" id="dropDown" onchange="changeColor();" class="far" style="height:55px; width:55px; font-weight:900; display:inline-block;">
+                    <option value="1" style="font-weight: 900; color:black;">&#xf111;</option>
+                    <option value="2" style="font-weight: 900; color: royalblue;">&#xf072;</option>
+                    <option value="3" style="font-weight: 900; color: darkred;">&#xf005;</option>
+                    <option value="4" style="font-weight: 900; color: darkblue;">&#xf005;</option>
+                    <option value="5" style="font-weight: 900; color: silver;">&#xf005;</option>
+                    <option value="6" style="font-weight: 900; color: gold;">&#xf005;</option>
+                </select>
+            </form>
+
+        </div>
+        <div style="margin-top: 10px; align-content:flex-end;">
+            <button class="btn" data-dismiss="modal" aria-hidden="false">Close</button>
+            <button id="submitButton" class="btn btn-primary">Make Change</button>
+        </div>
+
         <div class="modal-footer">
-           
+
         </div>
     </div>
     

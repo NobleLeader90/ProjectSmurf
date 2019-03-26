@@ -3,11 +3,11 @@
 
 $('#myModal').on('show.bs.modal', function (e) {
     var gradeId = $(e.relatedTarget).data('id');
-    $(e.currentTarget).find('p[name="state"]').text('Change from state: ' + gradeId);
+    $(e.currentTarget).find('p[name="state"]').text(gradeId);
     var eventId = $(e.relatedTarget).data('id2');
-    $(e.currentTarget).find('p[name="eventId"]').text('For Event: ' + eventId);
+    $(e.currentTarget).find('p[name="eventId"]').text(eventId);
     var lastName = $(e.relatedTarget).data('id3');
-    $(e.currentTarget).find('p[name="lastName"]').text('For Student: ' + lastName);
+    $(e.currentTarget).find('p[name="lastName"]').text(lastName);
 });
 
 //$('#ZeroField').click(function () {
