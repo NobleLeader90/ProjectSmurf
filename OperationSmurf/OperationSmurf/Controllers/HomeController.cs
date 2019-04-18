@@ -17,22 +17,25 @@ namespace OperationSmurf.Controllers
         private readonly StudentContext _studentContext;
         private readonly SectionContext _sectionContext;
 
+        private ClassroomGrid grid;
+
         public HomeController(EventContext ec, GradeContext gc, StudentContext sc, SectionContext ssc)
         {
             _context = ec;
             _gradeContext = gc;
             _studentContext = sc;
             _sectionContext = ssc;
+            grid = new ClassroomGrid();
         }
-                     
-        public IActionResult Index(int ?id=1)
+
+        public IActionResult Index(int? id = 1)
         {
             //Sections Button Prep for View
 
             //This is where we are preparing the data to send the sections available 
             //to dispaly as buttons to the view.
-            var classes = new List<Section>();         
-            foreach(Section s in _sectionContext.Section)
+            var classes = new List<Section>();
+            foreach (Section s in _sectionContext.Section)
             {
                 classes.Add(s);
             }
@@ -41,9 +44,52 @@ namespace OperationSmurf.Controllers
 
             ClassroomGrid myClass = new ClassroomGrid();
             myClass = getViewModel(id);
-            
+
             return View(myClass);
         }
+
+
+        public  IActionResult ChangeGrade([Bind("x,y,z,ChangeGrade")] int ?id)
+           
+        {
+            int x = -1;
+            int y = -1;
+            int studId = -1;
+
+            if (int.TryParse(HttpContext.Request.Form["x"], out x))
+            {
+
+            }
+            else
+            {
+
+            }
+            if (int.TryParse(HttpContext.Request.Form["y"], out y))
+            {
+
+            }
+            else
+            {
+
+            }
+            if (int.TryParse(HttpContext.Request.Form["z"], out studId))
+            {
+
+            }
+            else
+            {
+
+            }
+            //var gradeToSwap = _gradeContext.Find.Where(
+
+
+
+            return View();
+          }
+
+
+
+
 
         public ClassroomGrid getViewModel(int ?id = 1)
         {
@@ -58,21 +104,21 @@ namespace OperationSmurf.Controllers
 
 
             Section section = _sectionContext.Section.Find(id);
-            ClassroomGrid classToView = new ClassroomGrid();
-            classToView.CourseName = section.CourseName;
-            classToView.StudentNames = new List<string>();
-            classToView.Columns = new List<Event>();
+            //ClassroomGrid classToView = new ClassroomGrid();
+            this.grid.CourseName = section.CourseName;
+            this.grid.StudentNames = new List<string>();
+            this.grid.Columns = new List<Event>();
 
             //Loading Columns of Events
             var cols = _context.Event.Where(e => e.EventCode == s2.EventCode);
             foreach (Event ev in cols)
             {
-               classToView.Columns.Add(ev);
+               this.grid.Columns.Add(ev);
             }
 
 
 
-            classToView.Students = _studentContext.Student.Where(m =>
+            this.grid.Students = _studentContext.Student.Where(m =>
             (m.Period1 == id) ||
             (m.Period2 == id) ||
             (m.Period3 == id) ||
@@ -80,29 +126,30 @@ namespace OperationSmurf.Controllers
             (m.Period5 == id) ||
             (m.Period6 == id)
             ).ToList();
-            classToView.GradeGrid = new Grade[classToView.Students.Count, classToView.Columns.Count];
+            this.grid.GradeGrid = new Grade[this.grid.Students.Count, this.grid.Columns.Count];
 
             //Loading Students
-            foreach (Student student in classToView.Students)
+            foreach (Student student in this.grid.Students)
             {
-                classToView.StudentNames.Add(student.FirstName + " " + student.LastName);
+                this.grid.StudentNames.Add(student.FirstName + " " + student.LastName);
+                this.grid.StudentIds.Add(student.Id);
             }
 
-            int numStuds = classToView.Students.Count();
+            int numStuds = this.grid.Students.Count();
             for (int x = 0; x < numStuds; x++)
             {
 
-                for (int y = 0; y < classToView.Columns.Count; y++)
+                for (int y = 0; y < this.grid.Columns.Count; y++)
                 {
 
                     try
                     {
                         //Grades pulled that match the section and match the student
-                        classToView.GradeGrid[x, y] = _gradeContext.Grade.First(g => (g.EventId == classToView.Columns[y].Id) && (g.StudentId == classToView.Students[x].Id));
+                        this.grid.GradeGrid[x, y] = _gradeContext.Grade.First(g => (g.EventId == this.grid.Columns[y].Id) && (g.StudentId == this.grid.Students[x].Id));
 
-                        if (classToView.GradeGrid == null)
+                        if (this.grid.GradeGrid == null)
                         {
-                            classToView.GradeGrid[0, 0] = new Grade();
+                            this.grid.GradeGrid[0, 0] = new Grade();
                             ViewData["LoadError"] = "Grade grid was empty for this section...";
                         }
 
@@ -118,7 +165,7 @@ namespace OperationSmurf.Controllers
 
 
 
-            return classToView;
+            return this.grid;
         }
 
 
