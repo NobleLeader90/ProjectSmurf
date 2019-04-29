@@ -28,8 +28,18 @@ namespace OperationSmurf.Controllers
             grid = new ClassroomGrid();
         }
 
-        public IActionResult Index(int? id = 1)
+        public IActionResult Index(int? id = 1 )
         {
+            //ClassroomGrid myClass = new ClassroomGrid();
+            if (grid == null)
+            {
+                this.grid = new ClassroomGrid();
+                this.grid = getViewModel(id);
+            } else
+            {
+                this.grid = getViewModel(id);
+            }
+            
             //Sections Button Prep for View
 
             //This is where we are preparing the data to send the sections available 
@@ -41,20 +51,22 @@ namespace OperationSmurf.Controllers
             }
             ViewData["classes"] = classes;
             ViewData["tracer"] = "This is the ID: " + id.ToString();
+            ViewData["sectionId"] = id;
+            
 
-            ClassroomGrid myClass = new ClassroomGrid();
-            myClass = getViewModel(id);
-
-            return View(myClass);
+            return View(this.grid);
         }
 
 
-        public  IActionResult ChangeGrade([Bind("x,y,z,ChangeGrade")] int ?id)
+        public  IActionResult ChangeGrade([Bind("x,y,z,ChangeState,sectionId")] int ?id)
            
         {
+            //getViewModel(id);
             int x = -1;
             int y = -1;
             int studId = -1;
+            int newState = -1;
+            int sectionId = -1;
 
             if (int.TryParse(HttpContext.Request.Form["x"], out x))
             {
@@ -80,12 +92,36 @@ namespace OperationSmurf.Controllers
             {
 
             }
-            //var gradeToSwap = _gradeContext.Find.Where(
+            if (int.TryParse(HttpContext.Request.Form["ChangeState"], out newState))
+            {
+
+            }
+            else
+            {
+
+            }
+            //if (int.TryParse(HttpContext.Request.Form["sectionId"], out sectionId))
+            //{
+
+            //}
+            //else
+            //{
+
+            //}
+
+            //Load proper grade
+            var newGrade =  _gradeContext.Grade.FirstOrDefault(t => 
+
+            (t.SectionId == id) && (t.EventId == y)
+
+            );
+
+            newGrade.State = newState;
+            
 
 
-
-            return View();
-          }
+            return RedirectToAction(nameof(Index));
+        }
 
 
 

@@ -59,7 +59,7 @@
                             @switch (Model.GradeGrid[x, y].State)
                             {
                                 case 0:
-                                    <td width="40px"  data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName" data-id4="@x" data-id5="@y" data-id6="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId))"><p class="far fa-circle" style="color: black;"></p></a></td>
+                                    <td width="40px"  data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName" data-id4="@x" data-id5="@y" data-id6="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).Id"><p class="far fa-circle" style="color: black;"></p></a></td>
                                     break;
                                 case 1:
                                     <td data-toggle="tooltip" data-placement="top" title="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName:@Model.Columns[y].EventNum"><a href="#myModal" data-toggle="modal" data-id="@Model.GradeGrid[x,y].State" data-id2="@Model.Columns[y].EventNum" data-id3="@Model.Students.Find(s => s.Id == (Model.GradeGrid[x,y].StudentId)).LastName"><p class="fas fa-plane" style="color: royalblue;"></p></a></td>
@@ -135,6 +135,8 @@
                 <input type="hidden" name="x" />
                 <input type="hidden" name="y" />
                 <input type="hidden" name="z" />
+                <input type="hidden" name="sectionId" value=@ViewData["sectionId"]/>
+                <strong>@ViewData["sectionId"]</strong>
                 <strong>Student:</strong><p name="lastName">Current Grade: </p>
                 <strong>Event:</strong><p name="eventId"></p>
                 <strong>Current Grade:</strong><p name="state" ></p>
