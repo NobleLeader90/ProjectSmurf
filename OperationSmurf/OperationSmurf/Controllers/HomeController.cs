@@ -110,15 +110,17 @@ namespace OperationSmurf.Controllers
             //}
 
             //Load proper grade
-            var newGrade =  _gradeContext.Grade.FirstOrDefault(t => 
+            var newGrade =  _gradeContext.Grade.First(t => 
 
-            (t.SectionId == id) && (t.EventId == y)
+            (t.SectionId == id) && (t.EventId == y) && (t.StudentId == studId)
 
             );
-
-            newGrade.State = newState;
-            
-
+            if (newGrade != null)
+            { 
+                newGrade.State = newState-1;
+                _gradeContext.Update(newGrade);
+                _gradeContext.SaveChanges();
+            }
 
             return RedirectToAction(nameof(Index));
         }
